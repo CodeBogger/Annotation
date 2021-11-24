@@ -26,10 +26,10 @@ public class Main {
                 } else {
                     //if there isn't more than one tag print the tag
                     System.out.printf(tag);
-                }
+                } // end of else statement executing the tag object if there aren't more than 1 strings in the array
                 //decrement tagLength by 1
                 tagLength--;
-            }
+            } // end of for loop - looping through each tag declared in methods for main file
             System.out.printf("%nLast Modified: %s%n", custom.lastModified());
             //process custom method annotation
             for (Method method : objectMain.getDeclaredMethods()) {
@@ -53,17 +53,17 @@ public class Main {
                                     method.getName(),
                                     ex.getCause());
                             failed++;
-                        }
+                        } // end of catch to catch runtime exceptions
                     } else {
                         System.out.printf("%s - Method '%s' - DIDN'T PROCESS \n",
                                 ++total,
                                 method.getName());
                         disabledRuntime++;
-                    }
-                }
-            }
+                    } // end of else statement for not processing
+                } // end of checking for annotations in custom method annotation file
+            } // end of for loop - loops through methods
             System.out.printf("\nResult - ");
             System.out.printf("Total: "+total+", Successful: "+success+", Failed: "+failed+", Disabled: "+disabledRuntime+"\n \n \n");
-        } // main
-    }
-}
+        } // end of if statement for custom type annotation file
+    } // end of main method
+} // end of class
