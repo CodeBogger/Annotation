@@ -7,29 +7,30 @@ public class Main {
         int success = 0;
         int failed = 0;
         int total = 0;
-        int disabled = 0;
+        int disabledRuntime = 0;
         Class<MethodsForMain> objectMain = MethodsForMain.class;
         //process for @CustomType annotation
         if (objectMain.isAnnotationPresent(CustomTypeAnnotation.class)) {
             Annotation annotationMain = objectMain.getAnnotation(CustomTypeAnnotation.class);
             CustomTypeAnnotation custom = (CustomTypeAnnotation) annotationMain;
             //listing all parts in annotation like a table
-            System.out.printf("%nPriority: ", custom.priority());
-            System.out.printf("%nCreated By: ", custom.createdBy());
+            System.out.printf("%nPriority: %s", custom.priority());
+            System.out.printf("%nCreated By: %s", custom.createdBy());
             System.out.printf("%nTags: ");
             //setting a tag length and looping through each tag
             int tagLength = custom.tags().length;
             for (String tag : custom.tags()) {
                 //if there are more than 1 tags add a coma
                 if (tagLength > 1) {
-                    System.out.println(tag + ",");
+                    System.out.printf(tag + ", ");
                 } else {
                     //if there isn't more than one tag print the tag
-                    System.out.println(tag);
+                    System.out.printf(tag);
                 }
                 //decrement tagLength by 1
                 tagLength--;
             }
+            System.out.printf("%nLast Modified: %s%n", custom.lastModified());
             //process custom method annotation
             for (Method method : objectMain.getDeclaredMethods()) {
                 //if method is annotated with custom method annotation
@@ -57,12 +58,12 @@ public class Main {
                         System.out.printf("%s - Method '%s' - DIDN'T PROCESS \n",
                                 ++total,
                                 method.getName());
-                        disabled++;
+                        disabledRuntime++;
                     }
                 }
             }
-            System.out.printf("Result - ");
-            System.out.printf("Total: "+total+", Successful: "+success+", Failed: "+failed+", Disabled: "+disabled+"\n \n \n");
+            System.out.printf("\nResult - ");
+            System.out.printf("Total: "+total+", Successful: "+success+", Failed: "+failed+", Disabled: "+disabledRuntime+"\n \n \n");
         } // main
     }
 }
